@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Year Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    body::before,
+    body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 4%; /* Ширина тени */
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1), -5px 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+    z-index: -1; /* Помещаем тени под содержимое страницы */
+    }
+
+    body::before {
+    left: 0;
+    }
+
+    body::after {
+    right: 0;
+    }
+
+
+    .countdown-container {
+      text-align: center;
+    }
+
+    #countdown {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #countdown div {
+      margin: 0 10px;
+      font-size: 1.5em;
+    }
+
+    #countdown span {
+      font-size: 2em;
+    }
+
+    /* main-head */
+    .main-head {
+        font-size: 4em;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+    <h1 class="main-head">New Year Countdown</h1>
+    <div id="countdown">
+      <div>
+        <span id="days"></span>
+        <div>Days</div>
+      </div>
+      <div>
+        <span id="hours"></span>
+        <div>Hours</div>
+      </div>
+      <div>
+        <span id="minutes"></span>
+        <div>Minutes</div>
+      </div>
+      <div>
+        <span id="seconds"></span>
+        <div>Seconds</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function updateCountdown() {
+      const currentTime = new Date();
+      const newYear = new Date(currentTime.getFullYear() + 1, 0, 1);
+      const difference = newYear - currentTime;
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = days;
+      document.getElementById('hours').innerText = hours;
+      document.getElementById('minutes').innerText = minutes;
+      document.getElementById('seconds').innerText = seconds;
+    }
+
+    setInterval(updateCountdown, 0);
+  </script>
+
+  <script>
+    function changeBackground() {
+  const currentTime = new Date();
+  const seconds = currentTime.getSeconds();
+
+  // Задаем цвета для градиента в зависимости от секунды
+  const color1 = `rgb(${Math.sin(seconds / 30 * Math.PI) / Math.PI * 240}, 200, 200)`;
+  const color2 = `rgb(200, ${Math.sin((seconds + 30) / 30 * Math.PI) / Math.PI * 240}, 200)`;
+
+  // Применяем градиентный фон к body
+  document.body.style.background = `linear-gradient(to right, ${color1}, ${color2})`;
+}
+
+setInterval(changeBackground, 0);
+
+  </script>
+</body>
+</html>
