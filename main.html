@@ -106,8 +106,8 @@
   const seconds = currentTime.getSeconds();
 
   // Задаем цвета для градиента в зависимости от секунды
-  const color1 = `rgb(${Math.sin(seconds / 30 * Math.PI) / Math.PI * 240}, 200, 200)`;
-  const color2 = `rgb(200, ${Math.sin((seconds + 30) / 30 * Math.PI) / Math.PI * 240}, 200)`;
+  const color1 = `rgb(${Math.sin(seconds / 20 * Math.PI) / Math.PI * 240}, 200, 200)`;
+  const color2 = `rgb(200, ${Math.sin((seconds + 20) / 20 * Math.PI) / Math.PI * 240}, 200)`;
 
   // Применяем градиентный фон к body
   document.body.style.background = `linear-gradient(to right, ${color1}, ${color2})`;
