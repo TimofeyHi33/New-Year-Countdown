@@ -56,30 +56,84 @@
     .main-head {
         font-size: 4em;
     }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   </style>
 </head>
 <body>
   <div class="countdown-container">
-    <h1 class="main-head">Новый год через</h1>
+    <h1 class="main-head">New Year Countdown</h1>
     <div id="countdown">
       <div>
         <span id="days"></span>
-        <div>Дней</div>
+        <div>Days</div>
       </div>
       <div>
         <span id="hours"></span>
-        <div>Часов</div>
+        <div>Hours</div>
       </div>
       <div>
         <span id="minutes"></span>
-        <div>Минут</div>
+        <div>Minutes</div>
       </div>
       <div>
         <span id="seconds"></span>
-        <div>Секунд</div>
+        <div>Seconds</div>
       </div>
     </div>
   </div>
+
+  <canvas id="snowfall"></canvas>
+  <script>
+    const canvas = document.getElementById('snowfall');
+const ctx = canvas.getContext('2d');
+
+// Устанавливаем размер canvas в размер окна браузера
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const snowflakes = [];
+const numberOfSnowflakes = 50; // Количество снежинок
+
+for (let i = 0; i < numberOfSnowflakes; i++) {
+  snowflakes.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    speed: Math.random() + 0.5,
+    radius: Math.random() * 2 + 1
+  });
+}
+
+function drawSnowflakes() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#fff';
+
+  for (let i = 0; i < snowflakes.length; i++) {
+    const snowflake = snowflakes[i];
+
+    ctx.beginPath();
+    ctx.arc(snowflake.x, snowflake.y, snowflake.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    snowflake.y += snowflake.speed;
+
+    if (snowflake.y > canvas.height) {
+      snowflake.x = Math.random() * canvas.width;
+      snowflake.y = -snowflake.radius;
+    }
+  }
+
+  requestAnimationFrame(drawSnowflakes);
+}
+
+drawSnowflakes();
+
+  </script>
+
   <script>
     function updateCountdown() {
       const currentTime = new Date();
