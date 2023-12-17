@@ -21,7 +21,7 @@
     bottom: 0;
     width: 4%; /* Ширина тени */
     box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1), -5px 0 10px rgba(0, 0, 0, 0.1); /* Тень */
-    z-index: -1; /* Помещаем тени под содержимое страницы */
+    z-index: -2; /* Помещаем тени под содержимое страницы */
     }
 
     body::before {
@@ -61,6 +61,7 @@
       position: absolute;
       top: 0;
       left: 0;
+      z-index: -1;
     }
   </style>
 </head>
