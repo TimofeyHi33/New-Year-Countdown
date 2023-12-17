@@ -103,7 +103,7 @@
   <script>
     function changeBackground() {
   const currentTime = new Date();
-  const seconds = currentTime.getSeconds();
+  const seconds = currentTime.getSeconds() + currentTime.getMilliseconds() / 1000;
 
   // Задаем цвета для градиента в зависимости от секунды
   const color1 = `rgb(${Math.sin(seconds / 20 * Math.PI) / Math.PI * 240}, 200, 200)`;
