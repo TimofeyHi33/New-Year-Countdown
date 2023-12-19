@@ -63,9 +63,19 @@
       left: 0;
       z-index: -1;
     }
+
+    canvas.front {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+    }
   </style>
 </head>
 <body>
+  <canvas class="front" id="front">
+  </canvas>
+
   <div class="countdown-container">
     <h1 class="main-head">Новый год через</h1>
     <div id="countdown">
@@ -91,11 +101,15 @@
   <canvas id="snowfall"></canvas>
   <script>
     const canvas = document.getElementById('snowfall');
+    const front_canvas = document.getElementById('front');
 const ctx = canvas.getContext('2d');
 
 // Устанавливаем размер canvas в размер окна браузера
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
+front_canvas.width = window.innerWidth;
+front_canvas.height = window.innerHeight;
 
 const snowflakes = [];
 const numberOfSnowflakes = 50; // Количество снежинок
@@ -105,7 +119,8 @@ for (let i = 0; i < numberOfSnowflakes; i++) {
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     speed: Math.random() + 0.5,
-    radius: Math.random() * 2 + 1
+    radius: Math.random() * 2 + 1,
+    being_deleted: false
   });
 }
 
@@ -123,6 +138,9 @@ function drawSnowflakes() {
     snowflake.y += snowflake.speed;
 
     if (snowflake.y > canvas.height) {
+      if (snowflake.being_deleted) {
+        snowflakes.splice(i, 1);
+      }
       snowflake.x = Math.random() * canvas.width;
       snowflake.y = -snowflake.radius;
     }
@@ -130,6 +148,28 @@ function drawSnowflakes() {
 
   requestAnimationFrame(drawSnowflakes);
 }
+
+function drawSnowflakesOnMouseMove(event) {
+  // mouse down
+  if (event.buttons !== 1) {
+    return;
+  }
+
+  const offsetX = event.clientX;
+  const offsetY = event.clientY;
+
+  for (let i = 0; i < 2; i++) {
+  snowflakes.push({
+    x: Math.random() * 6 - 3 + offsetX,
+    y: Math.random() * 6 - 3 + offsetY,
+    speed: Math.random() + 0.5,
+    radius: Math.random() * 2 + 1,
+    being_deleted: true
+  });
+}
+}
+
+front_canvas.addEventListener('mousemove', drawSnowflakesOnMouseMove);
 
 drawSnowflakes();
 
