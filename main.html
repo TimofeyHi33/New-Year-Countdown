@@ -172,8 +172,14 @@ drawSnowflakes();
 
   <script>
     function updateCountdown() {
-      const currentTime = new Date();
-      const newYear = new Date(currentTime.getFullYear() + 1, 0, 1);
+      const dateString = '2023-02-03';
+      const timeString = '15:30:00';
+      const dateFromString = new Date(dateString);
+      const newYear = dateFromString
+      const [hours, minutes, seconds] = timeString.split(':');
+      newYear.setHours(Number(hours));
+      newYear.setMinutes(Number(minutes));
+      newYear.setSeconds(Number(seconds));
       const difference = newYear - currentTime;
 
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
