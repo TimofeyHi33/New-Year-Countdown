@@ -171,6 +171,11 @@ drawSnowflakes();
   </script>
 
   <script>
+    var days;
+    var hours;
+    var minutes;
+    var seconds;
+    
     function updateCountdown() {
       const dateString = '2023-02-03';
       const timeString = '15:30:00';
@@ -180,10 +185,10 @@ drawSnowflakes();
       
       const difference = deadline - currentTime;
       
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
       document.getElementById('days').innerText = days;
       document.getElementById('hours').innerText = hours;
