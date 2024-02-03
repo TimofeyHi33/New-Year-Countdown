@@ -77,7 +77,7 @@
   </canvas>
 
   <div class="countdown-container">
-    <h1 class="main-head">Новый год через</h1>
+    <h1 class="main-head">Дедлайн через</h1>
     <div id="countdown">
       <div>
         <span id="days"></span>
@@ -174,14 +174,12 @@ drawSnowflakes();
     function updateCountdown() {
       const dateString = '2023-02-03';
       const timeString = '15:30:00';
-      const dateFromString = new Date(dateString);
-      const newYear = dateFromString
-      const [hours, minutes, seconds] = timeString.split(':');
-      newYear.setHours(Number(hours));
-      newYear.setMinutes(Number(minutes));
-      newYear.setSeconds(Number(seconds));
-      const difference = newYear - currentTime;
-
+      
+      const deadline = new Date(`${dateString}T${timeString}`);
+      const currentTime = new Date();
+      
+      const difference = deadline - currentTime;
+      
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
