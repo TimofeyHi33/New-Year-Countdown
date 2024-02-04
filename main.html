@@ -178,7 +178,7 @@ drawSnowflakes();
       const deadline = new Date(`${dateString}T${timeString}`);
       const currentTime = new Date();
       
-      const difference = deadline - currentTime;
+      const difference = deadline - currentTime - 1;
       
       const days = Math.floor(difference / (1000 * 60 * 60 * 24));
       const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
